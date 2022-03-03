@@ -59,17 +59,16 @@ def download(yt_id, out_dir):
     else:
         """
         try:
-            print(yt_uri)
-            youtube_dl.YoutubeDL().download([yt_uri])
-            print(f"Downloading {yt_id}")
-        """
-        try:
             yt_uri = 'https://www.youtube.com/watch?v=' + yt_id
             mp4File = pytube.YouTube(yt_uri).streams.filter(file_extension='.mp4').first().download("tmp", filename="tmp")
             clip = AudioFileClip(mp4File)
             clip.write_audiofile(out_path)
             print("Downloaded: " + out_path)
             clip.close()
+        """
+        try:
+            yt_uri = 'https://www.youtube.com/watch?v=' + yt_id
+            os.system(f'youtube-dl -o {out_path} {yt_uri}')
         except KeyboardInterrupt:
             raise
         except Exception as e:
