@@ -65,8 +65,7 @@ def download(yt_id, out_dir):
         """
         try:
             yt_uri = 'https://www.youtube.com/watch?v=' + yt_id
-            mp4File = pytube.YouTube(yt_uri).streams.filter(
-            only_audio=True).first().download("tmp", filename="tmp")
+            mp4File = pytube.YouTube(yt_uri).streams.filter().first().download("tmp", filename="tmp")
             clip = AudioFileClip(mp4File)
             clip.write_audiofile(out_path)
             print("Downloaded: " + out_path)
